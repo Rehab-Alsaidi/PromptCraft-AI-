@@ -58,10 +58,11 @@ Web/
 
 
 ## Framework Cheat Sheet:
-Framework	Best For	Secret Sauce
-BROKE	Analytical tasks	Breaks down complex problems
-CRISPE	Creative writing	Adds stylistic flourishes
-Structured	Technical documentation	Clear, hierarchical output
+| Framework  | Best For              | Secret Sauce                     |
+|------------|-----------------------|----------------------------------|
+| 🧠 BROKE    | Analytical tasks      | Breaks down complex problems     |
+| 🎨 CRISPE   | Creative writing      | Adds stylistic flourishes        |
+| 📝 Structured | Technical documentation | Clear, hierarchical output    |
 
 ## 💡 Pro Tip: Combine frameworks! Try BROKE for analysis → CRISPE for presentation. Your AI outputs will never be the same!
 
