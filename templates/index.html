@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{% if lang == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ translations.title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-dark: #4f46e5;
+      --text-primary: #ffffff;
+      --text-secondary: #e2e8f0;
+      --text-tertiary: #94a3b8;
+      --bg-dark: #0f172a;
+      --bg-darker: #020617;
+      --bg-card: #1e293b;
+      --bg-card-light: #334155;
+      --border: #334155;
+      --border-light: #475569;
+      --success: #10b981;
+      --error: #ef4444;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: {{ "'Tajawal', sans-serif" if lang == 'ar' else "'Inter', sans-serif" }};
+      background: var(--bg-darker);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      text-align: {{ "right" if lang == 'ar' else "left" }};
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary-light), var(--text-primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .header .subtitle {
+      color: var(--text-tertiary);
+      font-size: 1.1rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Main Card */
+    .main-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(15, 23, 42, 0) 70%);
+      z-index: -1;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .select-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .select-wrapper::after {
+      content: "⌄";
+      position: absolute;
+      {% if lang == 'ar' %}left{% else %}right{% endif %}: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      pointer-events: none;
+      font-size: 1.2rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      background-color: var(--bg-card-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      appearance: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 1.2rem;
+      background-color: var(--bg-card-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      transition: var(--transition);
+      line-height: 1.7;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    textarea::placeholder {
+      color: var(--text-tertiary);
+      opacity: 0.7;
+    }
+
+    /* Buttons */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: var(--text-tertiary);
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .copy-btn {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary-light);
+      border: 1px solid var(--primary-light);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .copy-btn:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+
+    /* Loading Indicator */
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 2rem 0;
+      color: var(--primary-light);
+      font-weight: 500;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .loading-dots {
+      display: inline-flex;
+      align-items: center;
+      height: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .loading-dots span {
+      width: 8px;
+      height: 8px;
+      margin: 0 3px;
+      background-color: var(--primary-light);
+      border-radius: 50%;
+      display: inline-block;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .loading-dots span:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    .loading-dots span:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    /* Results Section */
+    .result-container {
+      margin-top: 2.5rem;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .result-container.show {
+      display: block;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .result-title {
+      font-size: 1.3rem;
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .result {
+      background-color: var(--bg-card-light);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      position: relative;
+    }
+
+    .result::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      {% if lang == 'ar' %}right{% else %}left{% endif %}: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), transparent);
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    }
+
+    /* Framework Info Section */
+    .framework-info {
+      margin-top: 3rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .framework-tabs {
+      display: flex;
+      background: var(--bg-card-light);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .framework-tab {
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      position: relative;
+      transition: var(--transition);
+      text-align: center;
+      flex: 1;
+    }
+
+    .framework-tab.active {
+      color: var(--primary-light);
+      background: var(--bg-card);
+    }
+
+    .framework-tab:not(:last-child) {
+      border-{% if lang == 'ar' %}left{% else %}right{% endif %}: 1px solid var(--border);
+    }
+
+    .framework-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .framework-content {
+      display: none;
+      padding: 1.5rem;
+    }
+
+    .framework-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .framework-content h2 {
+      color: var(--primary-light);
+      margin-bottom: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .framework-item {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .framework-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow);
+    }
+
+    .framework-item h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-direction: {% if lang == 'ar' %}row-reverse{% else %}row{% endif %};
+    }
+
+    .framework-item h3 i {
+      color: var(--primary-light);
+      font-size: 0.9rem;
+    }
+
+    .framework-item p {
+      color: var(--text-tertiary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Language Switcher */
+    .language-switcher {
+      position: absolute;
+      top: 1.5rem;
+      {% if lang == 'ar' %}left{% else %}right{% endif %}: 1.5rem;
+      z-index: 10;
+    }
+
+    .language-btn {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary-light);
+      border: 1px solid var(--primary-light);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .language-btn:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .header .subtitle {
+        font-size: 1rem;
+      }
+
+      .main-card {
+        padding: 1.5rem;
+      }
+
+      .framework-tabs {
+        flex-direction: column;
+      }
+
+      .framework-tab {
+        padding: 0.8rem;
+        text-align: {% if lang == 'ar' %}right{% else %}left{% endif %};
+      }
+
+      .framework-tab:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .framework-tab.active::after {
+        width: 3px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: auto;
+      }
+
+      .framework-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .language-switcher {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        margin-bottom: 1rem;
+        text-align: {% if lang == 'ar' %}left{% else %}right{% endif %};
+      }
+    }
+
+    /* Arabic specific adjustments */
+    html[dir="rtl"] {
+      letter-spacing: 0;
+    }
+
+    html[dir="rtl"] .framework-item h3,
+    html[dir="rtl"] .framework-content h2,
+    html[dir="rtl"] .result-title {
+      letter-spacing: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="language-switcher">
+      <button class="language-btn" onclick="switchLanguage()">
+        <i class="fas fa-language"></i>
+        <span>{{ translations.language_switch }}</span>
+      </button>
+    </div>
+
+    <div class="header">
+      <h1>{{ translations.title }}</h1>
+      <p class="subtitle">{{ translations.description }}</p>
+    </div>
+
+    <div class="main-card">
+      <div class="form-group">
+        <label for="framework">{{ translations.framework_label }}</label>
+        <div class="select-wrapper">
+          <select id="framework">
+            <option value="BROKE">{{ translations.broke_option }}</option>
+            <option value="CRISPE">{{ translations.crispe_option }}</option>
+            <option value="STRUCTURED">{{ translations.structured_option }}</option>
+          </select>
+        </div>
+
+        <label for="prompt">{{ translations.prompt_label }}</label>
+        <textarea id="prompt" aria-label="Prompt input" placeholder="{{ translations.prompt_placeholder }}"></textarea>
+      </div>
+
+      <div class="button-container">
+        <button id="enhanceBtn" onclick="enhancePrompt()">
+          <i class="fas fa-magic"></i>
+          <span>{{ translations.enhance_button }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="loading" class="loading">
+      <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      {{ translations.loading_text }}
+    </div>
+
+    <div id="result-container" class="result-container">
+      <div class="result-header">
+        <div class="result-title">{{ translations.enhanced_prompt }}</div>
+        <button class="copy-btn" onclick="copyToClipboard()">
+          <i class="far fa-copy"></i>
+          {{ translations.copy_button }}
+        </button>
+      </div>
+      <div id="result" class="result"></div>
+    </div>
+
+    <div class="framework-info">
+      <div class="framework-tabs">
+        <div class="framework-tab active" onclick="showFramework('broke')">{{ translations.broke_tab }}</div>
+        <div class="framework-tab" onclick="showFramework('crispe')">{{ translations.crispe_tab }}</div>
+        <div class="framework-tab" onclick="showFramework('structured')">{{ translations.structured_tab }}</div>
+      </div>
+
+      <div id="broke-framework" class="framework-content active">
+        <h2>{{ translations.broke_title }}</h2>
+        <div class="framework-grid">
+          <div class="framework-item">
+            <h3><i class="fas fa-landmark"></i> {{ translations.broke_background }}</h3>
+            <p>{{ translations.broke_background_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-user-tie"></i> {{ translations.broke_role }}</h3>
+            <p>{{ translations.broke_role_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-bullseye"></i> {{ translations.broke_objectives }}</h3>
+            <p>{{ translations.broke_objectives_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-chart-line"></i> {{ translations.broke_key_results }}</h3>
+            <p>{{ translations.broke_key_results_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-seedling"></i> {{ translations.broke_evolve }}</h3>
+            <p>{{ translations.broke_evolve_desc }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="crispe-framework" class="framework-content">
+        <h2>{{ translations.crispe_title }}</h2>
+        <div class="framework-grid">
+          <div class="framework-item">
+            <h3><i class="fas fa-globe"></i> {{ translations.crispe_context }}</h3>
+            <p>{{ translations.crispe_context_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-theater-masks"></i> {{ translations.crispe_role }}</h3>
+            <p>{{ translations.crispe_role_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-keyboard"></i> {{ translations.crispe_input }}</h3>
+            <p>{{ translations.crispe_input_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-list-ol"></i> {{ translations.crispe_steps }}</h3>
+            <p>{{ translations.crispe_steps_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-ruler"></i> {{ translations.crispe_parameters }}</h3>
+            <p>{{ translations.crispe_parameters_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-flag-checkered"></i> {{ translations.crispe_end_goal }}</h3>
+            <p>{{ translations.crispe_end_goal_desc }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="structured-framework" class="framework-content">
+        <h2>{{ translations.structured_title }}</h2>
+        <div class="framework-grid">
+          <div class="framework-item">
+            <h3><i class="fas fa-hat-wizard"></i> {{ translations.structured_role }}</h3>
+            <p>{{ translations.structured_role_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-history"></i> {{ translations.structured_background }}</h3>
+            <p>{{ translations.structured_background_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-ban"></i> {{ translations.structured_constraints }}</h3>
+            <p>{{ translations.structured_constraints_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-trophy"></i> {{ translations.structured_goals }}</h3>
+            <p>{{ translations.structured_goals_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-lightbulb"></i> {{ translations.structured_examples }}</h3>
+            <p>{{ translations.structured_examples_desc }}</p>
+          </div>
+          <div class="framework-item">
+            <h3><i class="fas fa-project-diagram"></i> {{ translations.structured_workflows }}</h3>
+            <p>{{ translations.structured_workflows_desc }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showFramework(frameworkId) {
+      // Hide all framework contents
+      document.querySelectorAll('.framework-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Show selected framework content
+      document.getElementById(`${frameworkId}-framework`).classList.add('active');
+      
+      // Update active tab
+      document.querySelectorAll('.framework-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+    }
+
+    async function enhancePrompt() {
+      const prompt = document.getElementById('prompt').value.trim();
+      const framework = document.getElementById('framework').value;
+      const loading = document.getElementById('loading');
+      const resultContainer = document.getElementById('result-container');
+      const result = document.getElementById('result');
+      const button = document.getElementById('enhanceBtn');
+
+      if (!prompt) {
+        alert('{{ translations.alert_empty_prompt }}');
+        return;
+      }
+
+      loading.classList.add('show');
+      resultContainer.classList.remove('show');
+      button.disabled = true;
+
+      try {
+        const response = await fetch('/enhance-prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt, framework })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          result.textContent = data.enhanced_prompt || '{{ translations.no_enhancement }}';
+          resultContainer.classList.add('show');
+        } else {
+          alert('{{ translations.server_error }}: ' + (data.error || '{{ translations.unknown_error }}'));
+        }
+      } catch (error) {
+        alert('{{ translations.network_error }}: ' + error.message);
+      } finally {
+        loading.classList.remove('show');
+        button.disabled = false;
+      }
+    }
+
+    function copyToClipboard() {
+      const result = document.getElementById('result');
+      navigator.clipboard.writeText(result.textContent)
+        .then(() => {
+          const copyBtn = document.querySelector('.copy-btn');
+          const originalText = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fas fa-check"></i> {{ translations.copied_text }}';
+          setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('{{ translations.copy_failed }}: ', err);
+        });
+    }
+
+    async function switchLanguage() {
+      try {
+        const response = await fetch('/switch-language', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+          location.reload();
+        }
+      } catch (error) {
+        console.error('{{ translations.language_switch_failed }}: ', error);
+      }
+    }
+  </script>
+</body>
+</html>
