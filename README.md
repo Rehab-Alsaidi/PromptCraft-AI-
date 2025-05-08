@@ -68,7 +68,8 @@ Web/
 
 *"PromptCraft reduced my prompt engineering time by 70%" - Imaginary Satisfied User*
 
-Like what you see? ⭐ Star the repo to support development!
+Like what you see?
+⭐ Star the repo to support development!
 
 Disclaimer: Actual results may cause excessive AI awesomeness. Use responsibly.
 
