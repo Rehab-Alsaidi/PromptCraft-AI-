@@ -24,6 +24,7 @@ Turn your raw ideas into polished, framework-optimized prompts with one click! P
 ```bash
 pip install -r requirements.txt
 python app.py
+```
 
 
 ## 🚀 How To Use
@@ -47,11 +48,13 @@ Frontend	HTML5 + Jinja2
 Languages	English & Arabic
 
 ## 📂 Project Structure
+```bash
 Web/
 ├── app.py                 # Main application
 ├── requirements.txt       # Dependencies
 └── templates/
     └── index.html         # Frontend
+```
 
 
 ## Framework Cheat Sheet:
