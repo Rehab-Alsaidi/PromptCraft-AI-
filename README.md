@@ -1,50 +1,74 @@
-# 📘 PromptCraft AI
-PromptCraft AI is a web application that transforms your plain text ideas into structured, enhanced prompts using advanced AI frameworks like BROKE, CRISPE, and Structured Template, supporting both English and Arabic.
+# ✨ PromptCraft AI - Elevate Your AI Interactions  
 
-🌐 Live Demo
+Turn your raw ideas into polished, framework-optimized prompts with one click! Perfect for writers, developers, and AI enthusiasts.
 
-![image](https://github.com/user-attachments/assets/0e20567c-7003-4ac0-a3ab-39e72ccec020)
-![image](https://github.com/user-attachments/assets/bd0a36b1-91cc-43e2-a92b-01aebef675c6)
+![Demo Screenshot](https://github.com/user-attachments/assets/0e20567c-7003-4ac0-a3ab-39e72ccec020)
 
+## 🌟 Features
+- **3 Enhancement Frameworks** (BROKE/CRISPE/Structured)
+- **Bilingual Support** (English & العربية)
+- **Google Gemini Integration** via LangChain
+- **Simple Web Interface** (Flask + HTML)
 
-🚀 Features
-Enhances user prompts using 3 AI frameworks
+## 🔑 Getting Started
 
-Supports multilingual input (English + Arabic)
+### 1. Get Your API Key
+1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Click "Create API Key"
+3. Replace in `app.py`:
+   ```python
+   genai.configure(api_key="YOUR_API_KEY_HERE")
 
-Framework-guided response structure
+## 2. Installation
+pip install -r requirements.txt
+python app.py
 
-Google Gemini integration via LangChain
+## 🚀 How To Use
+Enter your basic prompt (e.g. "Explain quantum computing")
 
-Simple web interface using Flask + HTML templates
+Select a framework:
 
-📁 Folder Structure
+🧠 BROKE (Analytical tasks)
+
+🎨 CRISPE (Creative writing)
+
+📝 Structured (Technical docs)
+
+Click Enhance → Get professional-grade prompt!
+
+## 🛠 Tech Stack
+Component	Technology
+Backend	Flask
+AI Integration	LangChain + Google Gemini
+Frontend	HTML5 + Jinja2
+Languages	English & Arabic
+
+## 📂 Project Structure
 Web/
-│
-├── app.py                 # Main Flask application
-├── requirements.txt       # Python dependencies
-├── templates/
-   └── index.html         # HTML frontend template
+├── app.py                 # Main application
+├── requirements.txt       # Dependencies
+└── templates/
+    └── index.html         # Frontend
 
 
+## Framework Cheat Sheet:
+Framework	Best For	Secret Sauce
+BROKE	Analytical tasks	Breaks down complex problems
+CRISPE	Creative writing	Adds stylistic flourishes
+Structured	Technical documentation	Clear, hierarchical output
 
-🧪 Example Use
-Enter your basic prompt.
+## 💡 Pro Tip: Combine frameworks! Try BROKE for analysis → CRISPE for presentation. Your AI outputs will never be the same!
 
-Choose a framework (BROKE / CRISPE / Structured).
+*"PromptCraft reduced my prompt engineering time by 70%" - Imaginary Satisfied User*
 
-Click “Enhance Prompt”.
+Like what you see? ⭐ Star the repo to support development!
 
-View the enhanced structured output.
+Disclaimer: Actual results may cause excessive AI awesomeness. Use responsibly.
 
-Switch language as needed.
-
-🛠 Tech Stack
-Backend: Flask, LangChain, Google Gemini
-
-Frontend: HTML5, Jinja2 Templates
-
-Languages Supported: English, Arabic
-
-
+## This version:
+✅ More visual appeal
+✅ Clear value proposition
+✅ Actionable API key instructions
+✅ Better structure with cheat sheet
+✅ Playful but professional tone
 
