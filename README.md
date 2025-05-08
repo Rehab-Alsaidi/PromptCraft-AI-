@@ -20,8 +20,11 @@ Turn your raw ideas into polished, framework-optimized prompts with one click! P
    genai.configure(api_key="YOUR_API_KEY_HERE")
 
 ## 2. Installation
+
+```bash
 pip install -r requirements.txt
 python app.py
+
 
 ## 🚀 How To Use
 Enter your basic prompt (e.g. "Explain quantum computing")
